@@ -5,10 +5,10 @@ The Green Finance Optimization Platform uses AI to optimize investments in susta
 
 ## Step-by-Step Workflow
 
-### 1. **Data Collection (Completed)**
+### 1. **Data Collection **
    - Collected ESG, climate, economic, and project-specific data from various sources.
 
-### 2. **Data Preprocessing (Ongoing)**
+### 2. **Data Preprocessing **
    - Cleaning and preparing data for model training, including handling missing values and feature extraction.
 
 ### 3. **Model Loading from Hugging Face(Ongoing)**
