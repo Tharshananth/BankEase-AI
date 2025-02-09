@@ -1,38 +1,62 @@
-# IndustriAI
-The Green Finance Optimization Platform uses AI to optimize investments in sustainable projects, focusing on ESG impact and providing decision-making insights.
+# Banking Chatbot - README
 
-# Green Finance Optimization Platform
+## Overview
 
-## Step-by-Step Workflow
+This repository contains the code for a fine-tuned banking chatbot using Llama 2-7B with QLoRA. The chatbot is designed to handle a variety of banking-related queries efficiently.
 
-### 1. **Data Collection **
-   - Collected ESG, climate, economic, and project-specific data from various sources.
+## Model Details
 
-### 2. **Data Preprocessing **
-   - Cleaning and preparing data for model training, including handling missing values and feature extraction.
+* **Base Model:** NousResearch/Llama-2-7b-chat-hf
+* **Fine-tuned Model:** Tharshan/Llama-2-7b-ch
+* **Dataset Used:** Tharshan/Bank_Query
+* **Training Framework:** QLoRA
+* **CUDA Version:** 12.4
 
-### 3. **Model Loading from Hugging Face(Ongoing)**
-   - Load a pre-trained model from Hugging Face for ESG scoring and project evaluation.
+## Installation
 
-### 4. **Training Using Custom Data**
-   - Fine-tune the model with custom data to tailor it for specific project evaluation tasks.
+Ensure you have Python installed and then install the required dependencies:
 
-### 5. **Fine-Tuning Using QLoRA**
-   - Further improve model performance with QLoRA for better accuracy and adaptability.
+### 
+```bash
+pip install -q accelerate==0.21.0 peft==0.4.0 bitsandbytes==0.40.2 transformers==4.31.0 trl==0.4.7
+```
 
-### 6. **Pushing the Model to Hugging Face (Global AI Community)**
-   - Upload the fine-tuned model to Hugging Face for global access and collaboration.
+## Model Fine-Tuning
 
-### 7. **Loading the Fine-Tuned Model Locally**
-   - Load the fine-tuned model locally for testing and integration.
+The chatbot is fine-tuned using QLoRA on the Llama-2-7B model. Below are the steps to train the model:
 
-### 8. **Testing the Fine-Tuned Model**
-   - Test the model's performance to ensure accurate ESG scoring and optimization.
+```python
+model_name = "NousResearch/Llama-2-7b-chat-hf"
 
-### 9. **Deploying in Web**
-   - Deploy the model on the web with an interactive dashboard and API for stakeholders.
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name, load_in_8bit=True)
+```
+##push the fine-tunned model to your hugging face 
+```python
+# Push to Hugging Face Hub
+# give your  repo 
+tokenizer.push_to_hub("Tharshan/Llama-2-7b-chat-finetune-finchat", check_pr=True)
+model.push_to_hub("Tharshan/Llama-2-7b-ch", check_pr=True)
+```
+## Dataset
 
----
+We use a high-quality dataset containing 1 million banking queries and responses. The dataset provides multiple variations of the same questions with different phrasing and structured answers.
+```python
+# mention the needed dataset repo
+dataset = load_dataset("Tharshan/Bank_Query")
+print(dataset["train"][0])
+```
+## Running the Chatbot
+Once fine-tuned, you can load and run the chatbot as follows:
 
-## Future Steps
-- Continuous model improvement and platform expansion based on user feedback and new data.
+```python
+from transformers import pipeline
+
+chatbot = pipeline("text-generation", model="Tharshan/Llama-2-7b-ch")
+response = chatbot("What is my account balance?")
+print(response)
+```
+
+
+
+
