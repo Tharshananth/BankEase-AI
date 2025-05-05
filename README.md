@@ -1,5 +1,7 @@
 # Banking Chatbot - README
 
+#### Colab link  [https://drive.google.com/file/d/1Eq2_Pv2kJvFMuCkn-YlT9FQBuvwgy7qU/view?usp=sharing](https://drive.google.com/file/d/1Eq2_Pv2kJvFMuCkn-YlT9FQBuvwgy7qU/view?usp=sharing)
+
 ## Overview
 
 This repository contains the code for a fine-tuned banking chatbot using Llama 2-7B with QLoRA. The chatbot is designed to handle a variety of banking-related queries efficiently.
